@@ -1,5 +1,6 @@
 var request = require('request');
 
+//Nasa api request and cherry-pick required fields
 exports.getNeoList = function(cb, startDate,endDate,apiKey){
   var options = {
     url: 'https://api.nasa.gov/neo/rest/v1/feed?start_date=' + startDate + '&end_date=' + endDate + '&detailed=true&api_key=' + apiKey

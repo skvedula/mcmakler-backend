@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var EarthObj = require('../models/neo');
 
 // Get Homepage
 router.get('/', function(req, res){
@@ -8,26 +9,23 @@ router.get('/', function(req, res){
 
 // All routes speicified 
 router.get('/neo/hazardous', function(req, res){
-	res.send({'hello': 'world'});
+	EarthObj.find({"is_hazardous": true}, function(err, resp){
+		res.send(resp);
+	});
 });
 
 router.get('/neo/fastest', function(req, res){//?hazardous=(true|false)
-	res.send({'hello': 'world'});
+	if(typeof req.query.hazardous !== 'undefined' && req.query.hazardous !== null){
+		EarthObj.find({"is_hazardous": req.query.hazardous}, function(err, resp){
+			res.send(resp[0]);
+		}).sort({"speed": -1});
+	}
+	else{
+		EarthObj.find({"is_hazardous": false}, function(err, resp){
+			res.send(resp[0]);
+		}).sort({"speed": -1});
+	}
 });
 
-router.get('/neo/best-year', function(req, res){//?hazardous=(true|false)
-	res.send({'hello': 'world'});
-});
-
-router.get('/neo/best-month', function(req, res){//?hazardous=(true|false)
-	res.send({'hello': 'world'});
-});
-
-// extra route added to check functionality 
-//since year may not be reflecting changes while testing now
-
-router.get('/neo/best-month', function(req, res){//?hazardous=(true|false)
-	res.send({'hello': 'world'});
-});
 
 module.exports = router;

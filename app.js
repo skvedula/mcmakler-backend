@@ -35,8 +35,6 @@ app.get('/updateDB', function (req, res) {
         bulk_query.push({"updateOne":{"filter": results[i], "update": results[i], upsert: true}});
     };
     EarthObj.bulkWrite(bulk_query, function(err, data){
-        console.log("err - ", err);
-        console.log("data - ", data);
         if(!err){
             res.write("\n\nObjects found from NASA API for past three days:" + bulk_query.length +"\n\nDuplicate Objects found in DB: "+ data["matchedCount"] + "\n\nNewly Inserted Objects: " + data["upsertedCount"])
         }
