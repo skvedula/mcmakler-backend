@@ -7,6 +7,14 @@
 
 3. open http://localhost:3000/ in browser to view the default output
 
+##### Note:
+
+1. I have created a mongodb collection on cloud with my mlab account 
+
+2. Also I specifically made a route /updateDB that will get the data from NASA api for latest three days I am not deleting the documents before appending so documents can exist for more than three days if run for two consecutive days
+
+3. I do have exp in Docker but I have not written the code for it since I assumed it to be optional
+
 ### Testing
 
 1. You can check the response json objects when made GET requsts
