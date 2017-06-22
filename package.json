@@ -1,0 +1,26 @@
+{
+  "name": "assignment",
+  "version": "1.0.0",
+  "description": "mcmakler assignment backend",
+  "main": "app.js",
+  "author": "Surya Kiran V",
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
+    "express": "*",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "json-markup": "^1.1.0",
+    "mongodb": "^2.2.29",
+    "mongoose": "^4.4.20",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "prettyjson": "^1.2.1",
+    "request": "^2.79.0"
+  }
+}
