@@ -27,5 +27,46 @@ router.get('/neo/fastest', function(req, res){//?hazardous=(true|false)
 	}
 });
 
+router.get('/neo/best-year', function(req, res){//?hazardous=(true|false)
+	if(typeof req.query.hazardous !== 'undefined' && req.query.hazardous !== null){
+		EarthObj.aggregate([{"$match": {"is_hazardous": req.query.hazardous}}, {"$group": {"_id":{"year": {"$substr":["$date", 0, 4] } },"count": {"$sum": 1}}},{"$sort":{"count": -1}}], function(err, resp){
+			res.send(resp[0]["_id"]);
+		});
+	}
+	else{
+		EarthObj.aggregate([{"$match": {"is_hazardous": false}}, {"$group": {"_id":{"year": {"$substr":["$date", 0, 4] } }, "count": { "$sum": 1}}}, {"$sort":{"count": -1}}], function(err, resp){
+			res.send(resp[0]["_id"]);
+		});
+	}
+});
+
+router.get('/neo/best-month', function(req, res){//?hazardous=(true|false)
+	if(typeof req.query.hazardous !== 'undefined' && req.query.hazardous !== null){
+		EarthObj.aggregate([{"$match": {"is_hazardous": req.query.hazardous}}, {"$group": {"_id":{"month": {"$substr":["$date", 5, 2] } },"count": {"$sum": 1 }}},{"$sort":{"count": -1}}], function(err, resp){
+			res.send(resp[0]["_id"]);
+		});
+	}
+	else{
+		EarthObj.aggregate([{"$match": {"is_hazardous": false}}, {"$group": {"_id":{"month": {"$substr":["$date", 5, 2] } }, "count":{"$sum": 1 }}},{"$sort":{"count": -1}}], function(err, resp){
+			res.send(resp[0]["_id"]);
+		});
+	}
+});
+
+// extra route added to check functionality for best-day
+//since year may not be reflecting changes while testing now
+
+router.get('/neo/best-day', function(req, res){//?hazardous=(true|false)
+	if(typeof req.query.hazardous !== 'undefined' && req.query.hazardous !== null){
+		EarthObj.aggregate([{"$match": {"is_hazardous": req.query.hazardous}}, {"$group": {"_id":{"day": {"$substr":["$date", 8, 2] } }, "count": {"$sum": 1 }}},{"$sort":{"count": -1}}], function(err, resp){
+			res.send(resp[0]["_id"]);
+		});
+	}
+	else{
+		EarthObj.aggregate([{"$match": {"is_hazardous": false}}, {"$group": {"_id":{"day": {"$substr":["$date", 8, 2] } }, "count": { "$sum": 1 }}}, {"$sort":{"count": -1}}], function(err, resp){
+			res.send(resp[0]["_id"]);
+		});
+	}
+});
 
 module.exports = router;

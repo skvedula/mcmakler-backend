@@ -7,8 +7,11 @@
 
 3. open http://localhost:3000/ in browser to view the default output
 
+### Testing
+
+1. You can check the response json objects when made GET requsts
+
 ### Problem Statement
-# Basic Backend Developer Interview
 
 Dear candidate, please follow this readme and solve all questions.
 
